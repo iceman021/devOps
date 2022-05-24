@@ -1,19 +1,20 @@
 terraform {
-  backend "azurerm" {
+required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0.2"
+    }
   }
+   required_version = ">= 1.1.0"
 }
-
-provider "azurerm" {
-  version = "=3.6.0"
   # The "feature" block is required for AzureRM provider 2.x.
+provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "terraExample"
+resource "azurerm_resource_group" "rsg" {
+  name     = "terraform-group"
   location = "west europe"
 }
 
-output "id" {
-  value = data.azurerm_resource_group.terraExample.id
-}
+
